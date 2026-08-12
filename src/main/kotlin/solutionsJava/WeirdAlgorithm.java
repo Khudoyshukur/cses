@@ -1,5 +1,3 @@
-package solutionsJava;
-
 import java.util.Scanner;
 
 public class WeirdAlgorithm {
