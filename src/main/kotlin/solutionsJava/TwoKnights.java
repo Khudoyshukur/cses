@@ -8,7 +8,7 @@ public class TwoKnights {
         StringBuilder answers = new StringBuilder();
         for (long k = 1; k <= n; k++) {
             if (k > 1) answers.append("\n");
-            answers.append(validCounts2(k));
+            answers.append(validCounts3(k));
         }
 
         System.out.println(answers);
@@ -52,14 +52,23 @@ public class TwoKnights {
                 possiblePlacings += Math.max(0, k - 1);
                 possiblePlacings += Math.max(0, k - 1);
             }
+        }
 
-//        if ((col - 1) >= 0) {
-//            possiblePlacings += Math.max(0, k - 2);
-//        }
-//
-//        if ((col - 2) >= 0) {
-//            possiblePlacings += Math.max(0, k - 1);
-//        }
+        return totalPlacings - possiblePlacings;
+    }
+
+    // O(1)
+    private static long validCounts3(long k) {
+        long squares = k * k;
+        long totalPlacings = ((1 + (squares - 1)) * (squares - 1) / 2);
+
+        long possiblePlacings;
+        if (k == 1L) {
+            possiblePlacings = 0;
+        } else if (k == 2L) {
+            possiblePlacings = 0;
+        } else {
+            possiblePlacings = (k - 2L) * (2 * (k - 2) + 2 * (k - 1)) + (2 * (k - 2));
         }
 
         return totalPlacings - possiblePlacings;

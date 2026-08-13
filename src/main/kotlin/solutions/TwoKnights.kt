@@ -7,7 +7,7 @@ fun main() {
     val n = scanner.nextLong()
 
     val answers = mutableListOf<Long>()
-    for (k in 1..n) { answers.add(validCounts2(k)) }
+    for (k in 1..n) { answers.add(validCounts3(k)) }
 
     println(answers.joinToString(separator = "\n"))
 }
@@ -51,14 +51,22 @@ private fun validCounts2(k: Long): Long {
             possiblePlacings += maxOf(0, k - 1)
             possiblePlacings += maxOf(0, k - 1)
         }
+    }
 
-//        if ((col - 1) >= 0) {
-//            possiblePlacings += maxOf(0, k - 2)
-//        }
-//
-//        if ((col - 2) >= 0) {
-//            possiblePlacings += maxOf(0, k - 1)
-//        }
+    return totalPlacings - possiblePlacings
+}
+
+// O(1)
+private fun validCounts3(k: Long): Long {
+    val squares = k * k
+    val totalPlacings = ((1 + (squares - 1)) * (squares - 1) / 2)
+
+    var possiblePlacings = 0L
+
+    possiblePlacings = when(k) {
+        1L -> 0
+        2L -> 0
+        else -> (k - 2L) * (2 * (k - 2) + 2 * (k - 1)) + (2 * (k - 2))
     }
 
     return totalPlacings - possiblePlacings
